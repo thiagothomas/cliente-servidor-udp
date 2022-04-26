@@ -27,11 +27,10 @@ public class Peer {
 
         servidor = new Servidor(portaPeer);
 
-        System.out.print("> Digite o número da porta para a qual o cliente deste peer deve receber mensagens: ");
-        String porta = leitor.readLine();
-        String hostname = InetAddress.getLocalHost().getHostAddress();
-        enderecoCliente = hostname + ":" + porta;
-        new Cliente(hostname, porta).start();
+        System.out.print("> Digite o endereco pelo o qual o cliente deste peer deve receber mensagens: ");
+        String end = leitor.readLine();
+        enderecoCliente = end;
+        new Cliente(end).start();
 
         atualizarPeersConectados();
     }
