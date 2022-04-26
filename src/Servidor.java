@@ -13,14 +13,14 @@ public class Servidor {
         this.socketDoServidor = new DatagramSocket(Integer.parseInt(porta));
     }
 
-    public void enviarMensagem(String comando, List<String> portas) throws IOException {
+    public void enviarMensagem(String comando, List<String> enderecos) throws IOException {
         DatagramPacket pacote;
-        for (String porta : portas) {
-
+        for (String endereco : enderecos) {
+            String[] end = endereco.split(":");
             pacote = new DatagramPacket(comando.getBytes(StandardCharsets.ISO_8859_1),
                     comando.length(),
-                    InetAddress.getLocalHost(),
-                    Integer.parseInt(porta)
+                    InetAddress.getByName(end[0]),
+                    Integer.parseInt(end[1])
             );
 
             socketDoServidor.send(pacote);

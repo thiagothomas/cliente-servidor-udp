@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
 import java.util.Collections;
 
 public class Cliente extends Thread {
@@ -14,8 +15,8 @@ public class Cliente extends Thread {
     private final DatagramSocket socket;
     private byte[] buffer = new byte[65000];
 
-    Cliente(String port) throws IOException {
-        this.socket = new DatagramSocket(Integer.parseInt(port));
+    Cliente(String hostname, String porta) throws IOException {
+        this.socket = new DatagramSocket(new InetSocketAddress(hostname, Integer.parseInt(porta)));
     }
 
     @Override
