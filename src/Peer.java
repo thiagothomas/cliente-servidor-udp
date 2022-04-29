@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Peer {
 
-    public static Client cliente;
+    public static Cliente cliente;
     public static String nomePeer;
     private static BufferedReader leitor;
     private static String enderecoServidor;
@@ -24,12 +24,12 @@ public class Peer {
         System.out.print("> Digite o número da porta para o cliente deste peer: ");
         String portaPeer = leitor.readLine();
 
-        cliente = new Client(portaPeer);
+        cliente = new Cliente(portaPeer);
 
         System.out.print("> Digite o endereco pelo o qual o servidor deste peer deve receber mensagens: ");
         String end = leitor.readLine();
         enderecoServidor = end;
-        new Server(end).start();
+        new Servidor(end).start();
 
         atualizarPeersConectados();
     }

@@ -5,11 +5,11 @@ import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class Client {
+public class Cliente {
 
     public final DatagramSocket socketDoServidor;
 
-    Client(String porta) throws IOException {
+    Cliente(String porta) throws IOException {
         this.socketDoServidor = new DatagramSocket(Integer.parseInt(porta));
     }
 

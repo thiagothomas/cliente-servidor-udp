@@ -10,12 +10,12 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Collections;
 
-public class Server extends Thread {
+public class Servidor extends Thread {
 
     private final DatagramSocket socket;
     private byte[] buffer = new byte[65000];
 
-    Server(String endereco) throws IOException {
+    Servidor(String endereco) throws IOException {
         String[] valores = endereco.split(":");
         this.socket = new DatagramSocket(Integer.parseInt(valores[1]), InetAddress.getByName(valores[0]));
     }
