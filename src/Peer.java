@@ -3,17 +3,16 @@ import javax.json.JsonWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Peer {
 
-    public static Servidor servidor;
+    public static Client cliente;
     public static String nomePeer;
     private static BufferedReader leitor;
-    private static String enderecoCliente;
+    private static String enderecoServidor;
     private static List<String> enderecos;
 
     public static void main(String[] args) throws IOException {
@@ -22,15 +21,15 @@ public class Peer {
         System.out.print("> Digite um nome para este peer: ");
         nomePeer = leitor.readLine();
 
-        System.out.print("> Digite o número da porta para o servidor deste peer: ");
+        System.out.print("> Digite o número da porta para o cliente deste peer: ");
         String portaPeer = leitor.readLine();
 
-        servidor = new Servidor(portaPeer);
+        cliente = new Client(portaPeer);
 
-        System.out.print("> Digite o endereco pelo o qual o cliente deste peer deve receber mensagens: ");
+        System.out.print("> Digite o endereco pelo o qual o servidor deste peer deve receber mensagens: ");
         String end = leitor.readLine();
-        enderecoCliente = end;
-        new Cliente(end).start();
+        enderecoServidor = end;
+        new Server(end).start();
 
         atualizarPeersConectados();
     }
@@ -73,14 +72,14 @@ public class Peer {
         try (JsonWriter json = Json.createWriter(string)) {
             json.writeObject(
                     Json.createObjectBuilder()
-                            .add(Utils.SERVIDOR, enderecoCliente)
+                            .add(Utils.SERVIDOR, enderecoServidor)
                             .add(Utils.NOME_PEER, nomePeer)
                             .add(Utils.COMANDO, comando)
                             .build()
             );
         }
 
-        servidor.enviarMensagem(string.toString(), enderecos);
+        cliente.enviarMensagem(string.toString(), enderecos);
     }
 
 }

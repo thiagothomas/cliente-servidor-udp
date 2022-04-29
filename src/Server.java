@@ -8,15 +8,14 @@ import java.io.StringWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.util.Collections;
 
-public class Cliente extends Thread {
+public class Server extends Thread {
 
     private final DatagramSocket socket;
     private byte[] buffer = new byte[65000];
 
-    Cliente(String endereco) throws IOException {
+    Server(String endereco) throws IOException {
         String[] valores = endereco.split(":");
         this.socket = new DatagramSocket(Integer.parseInt(valores[1]), InetAddress.getByName(valores[0]));
     }
@@ -84,7 +83,7 @@ public class Cliente extends Thread {
             );
         }
 
-        Peer.servidor.enviarMensagem(string.toString(), Collections.singletonList(endereco));
+        Peer.cliente.enviarMensagem(string.toString(), Collections.singletonList(endereco));
     }
 
 
